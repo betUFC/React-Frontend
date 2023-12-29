@@ -13,8 +13,7 @@ const FightPredictor = () => {
     setShowAdvancedStats(!showAdvancedStats);
   };
 
-  // TODO: Configure real API URL
-  const baseURL = "http://127.0.0.1:5000/";
+  const baseURL = "http://3.131.89.190:5000/";
 
   const handlePredictClick = async () => {
     try {
