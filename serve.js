@@ -1,5 +1,5 @@
 // serve.js
-import { exec } from "child_process";
+const { exec } = require("child_process");
 
 exec("serve -s build -l 80", (error, stdout, stderr) => {
   if (error) {
