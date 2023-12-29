@@ -8,7 +8,7 @@ const Testing = () => {
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const baseURL = "http://3.131.89.190:5000/";
+  const baseURL = "http://3.131.89.190:5000";
 
   const handleTestClick = async () => {
     try {

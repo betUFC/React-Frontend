@@ -13,7 +13,7 @@ const FightPredictor = () => {
     setShowAdvancedStats(!showAdvancedStats);
   };
 
-  const baseURL = "http://3.131.89.190:5000/";
+  const baseURL = "http://3.131.89.190:5000";
 
   const handlePredictClick = async () => {
     try {
