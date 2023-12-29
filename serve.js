@@ -1,11 +1,14 @@
 // serve.js
-const serve = 'serve';
-const args = ['-s', 'build', '-l', '80'];
+import { exec } from "child_process";
 
-import(serve)
-  .then((serveModule) => {
-    serveModule.serve(args);
-  })
-  .catch((error) => {
-    console.error('Failed to start server:', error);
-  });
+exec("serve -s build -l 80", (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`Stderr: ${stderr}`);
+    return;
+  }
+  console.log(`Stdout: ${stdout}`);
+});
