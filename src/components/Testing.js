@@ -1,16 +1,32 @@
 import { React, useState } from "react";
 import axios from "axios";
-import raw from "../constants/predictions.txt";
+import { baseURL } from "../constants";
 
 const Testing = () => {
-  const [testFrom, setTestFrom] = useState(null);
-  const [testTo, setTestTo] = useState(null);
+  const [startYear, setStartYear] = useState(null);
+  const [endYear, setEndYear] = useState(null);
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const baseURL = "http://3.131.89.190:5000";
+  const [imageSrc, setImageSrc] = useState("");
 
   const handleTestClick = async () => {
+    if (
+      ![2021, 2022, 2023, 2024].includes(parseInt(startYear)) ||
+      ![2021, 2022, 2023, 2024].includes(parseInt(endYear))
+    ) {
+      alert(
+        "Please enter valid years: 2021, 2022, 2023, or 2024 for both start and end years."
+      );
+      return;
+    }
+    if (parseInt(startYear) >= parseInt(endYear)) {
+      alert("Start year must be less than end year.");
+      return;
+    }
+
+    const testFrom = `${startYear}-01-01`;
+    const testTo = `${endYear}-01-01`;
+
     try {
       setIsLoading(true);
       console.log("Predicting fights...");
@@ -20,10 +36,12 @@ const Testing = () => {
       });
       console.log(response.data);
       setResults(response.data.content);
+      const getImg = await axios.get(`${baseURL}/get_bankroll_plot`);
+      setImageSrc(`data:image/png;base64,${getImg.data.image}`);
+      console.log(imageSrc);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-
       console.error("Error predicting fight:", error);
     }
   };
@@ -36,19 +54,19 @@ const Testing = () => {
         <div className="mb-4">
           <input
             className="w-full border rounded py-2 px-3"
-            type="text"
-            placeholder="Enter Testing From Date Fight Card Link"
-            value={testFrom}
-            onChange={(e) => setTestFrom(e.target.value)}
+            type="number"
+            placeholder="Enter Start Year (2021-2024)"
+            value={startYear}
+            onChange={(e) => setStartYear(e.target.value)}
           />
         </div>
         <div className="mb-4">
           <input
             className="w-full border rounded py-2 px-3"
-            type="text"
-            placeholder="Enter Testing To Date Fight Card Link"
-            value={testTo}
-            onChange={(e) => setTestTo(e.target.value)}
+            type="number"
+            placeholder="Enter End Year (2021-2024)"
+            value={endYear}
+            onChange={(e) => setEndYear(e.target.value)}
           />
         </div>
         <button
@@ -61,6 +79,11 @@ const Testing = () => {
       <div className="mt-4 space-x-4">
         <pre className="text-wrap">{results}</pre>
       </div>
+      {imageSrc && (
+        <div className="mt-4 space-x-4">
+          <img src={imageSrc} alt="Bankroll Plot" />
+        </div>
+      )}
     </div>
   );
 };

@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <div className="text-white text-lg font-semibold">
-            <Link to="/">UFC Predictor</Link>
+            <Link to="/">betUFC Predictor</Link>
           </div>
           <div className="space-x-4">
             <Link to="/about" className="text-white">
