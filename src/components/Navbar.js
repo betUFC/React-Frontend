@@ -3,23 +3,38 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto">
-        <div className="flex items-center justify-between">
-          <div className="text-white text-lg font-semibold">
-            <Link to="/">betUFC Predictor</Link>
-          </div>
-          <div className="space-x-4">
-            <Link to="/about" className="text-white">
-              About
-            </Link>
-            <Link to="/results" className="text-white">
-              Results
-            </Link>
-            <Link to="/testing" className="text-white">
-              Testing
-            </Link>
-          </div>
+    <nav className="bg-gray-900 p-4">
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="text-white text-2xl font-bold">
+          <Link to="/" className="hover:text-gray-300">
+            betUFC
+          </Link>
+        </div>
+        <div className="hidden md:flex space-x-4">
+          <Link
+            to="/about"
+            className="text-white hover:text-gray-300 font-semibold"
+          >
+            About
+          </Link>
+          <Link
+            to="/predict"
+            className="text-white hover:text-gray-300 font-semibold"
+          >
+            Predict
+          </Link>
+          <Link
+            to="/bets"
+            className="text-white hover:text-gray-300 font-semibold"
+          >
+            Bets
+          </Link>
+          <Link
+            to="/testing"
+            className="text-white hover:text-gray-300 font-semibold"
+          >
+            Testing
+          </Link>
         </div>
       </div>
     </nav>
