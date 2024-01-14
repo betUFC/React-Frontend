@@ -76,7 +76,7 @@ const Testing = () => {
           strategy: strategy,
         },
         {
-          timeout: 600000,
+          timeout: 600000, // 10 minutes
         }
       );
       // console.log(response.data);
